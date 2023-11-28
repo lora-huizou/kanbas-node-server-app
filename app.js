@@ -7,13 +7,13 @@ import Lab5 from "./Lab5.js";
 import cors from "cors";
 import mongoose from "mongoose";
 //mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
-
 mongoose.connect("mongodb://127.0.0.1:27017/kanbas", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, // 设置服务器选择超时时间（毫秒）
-    socketTimeoutMS: 45000, // 设置 socket 超时时间（毫秒）
+    serverSelectionTimeoutMS: 5000, 
+    socketTimeoutMS: 45000, 
 });
+//mongodb+srv://huizou:<zouhui123>@cluster0.z7tt4cu.mongodb.net/?retryWrites=true&w=majority
 
 
 import UserRoutes from "./users/routes.js";
@@ -22,12 +22,24 @@ import ModuleRoutes from "./modules/routes.js";
 import AssignmentRoutes from "./assignments/routes.js";
 
 const app = express();
+
 const corsOptions = {
-    credentials: true, 
-    //origin: 'http://localhost:3000',
-    origin: process.env.FRONTEND_URL
-  };
-app.use(cors(corsOptions)); 
+  credentials: true,
+  origin:'http://localhost:3000'
+};
+app.use(cors(corsOptions));
+// const allowedOrigins = ['http://localhost:3000', process.env.FRONTEND_URL];
+// const corsOptions = {
+//   credentials: true,
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// };
+// app.use(cors(corsOptions)); 
 
 const sessionOptions = {
   secret: "any string",
