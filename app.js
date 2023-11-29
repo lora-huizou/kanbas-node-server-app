@@ -13,7 +13,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/kanbas", {
     serverSelectionTimeoutMS: 5000, 
     socketTimeoutMS: 45000, 
 });
-//mongodb+srv://huizou:<zouhui123>@cluster0.z7tt4cu.mongodb.net/?retryWrites=true&w=majority
+//mongodb+srv://huizou:<password>@cluster0.z7tt4cu.mongodb.net/?retryWrites=true&w=majority
 
 
 import UserRoutes from "./users/routes.js";
