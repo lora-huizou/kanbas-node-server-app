@@ -11,22 +11,6 @@ function UserRoutes(app) {
   // res.json(currentUser);
   // };
 
-  const signin = async (req, res) => {
-    try {
-      const { username, password } = req.body;
-      const currentUser = await dao.findUserByCredentials(username, password);
-      if (currentUser) {
-        req.session['currentUser'] = currentUser;
-        res.json(currentUser);
-      } else {
-        res.status(401).json({ message: 'Invalid credentials' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
-    }
-  };
-
   // const account = async (req, res) => {
   //   try{
   //     const currentUser = req.session['currentUser'];
@@ -53,8 +37,7 @@ function UserRoutes(app) {
       const { userId } = req.params;
       const status = await dao.updateUser(userId, req.body);
       const currentUser = await dao.findUserById(userId);
-      // 可以选择返回更新后的用户信息 res.json(currentUser);
-      req.session['currentUser'] = currentUser;  // 或者如果只想返回操作状态：
+      req.session['currentUser'] = currentUser;  
       res.json(status);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -106,6 +89,22 @@ function UserRoutes(app) {
     const currentUser = await dao.createUser(req.body);
     req.session['currentUser'] = currentUser;
     res.json(currentUser)
+  };
+
+  const signin = async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const currentUser = await dao.findUserByCredentials(username, password);
+      if (currentUser) {
+        req.session['currentUser'] = currentUser;
+        res.json(currentUser);
+      } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
   };
 
   const signout = (req, res) => {
