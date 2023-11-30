@@ -6,14 +6,16 @@ import Lab5 from "./Lab5.js";
 import cors from "cors";
 import mongoose from "mongoose";
 //mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
-mongoose.connect("mongodb://127.0.0.1:27017/kanbas", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, 
-    socketTimeoutMS: 45000, 
-});
-//mongodb+srv://huizou:<password>@cluster0.z7tt4cu.mongodb.net/?retryWrites=true&w=majority
+// mongoose.connect("mongodb://127.0.0.1:27017/kanbas", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverSelectionTimeoutMS: 5000, 
+//     socketTimeoutMS: 45000, 
+// });
 
+const CONNECTION_STRING =
+  process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+mongoose.connect(CONNECTION_STRING);
 
 import UserRoutes from "./users/routes.js";
 import CourseRoutes from "./courses/routes.js";
