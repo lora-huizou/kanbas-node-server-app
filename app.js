@@ -1,4 +1,3 @@
-//const express = require('express');
 import "dotenv/config";
 import session from "express-session";
 import express from "express";
@@ -23,23 +22,17 @@ import AssignmentRoutes from "./assignments/routes.js";
 
 const app = express();
 
-const corsOptions = {
-  credentials: true,
-  origin:'http://localhost:3000'
-};
-app.use(cors(corsOptions));
-// const allowedOrigins = ['http://localhost:3000', process.env.FRONTEND_URL];
 // const corsOptions = {
 //   credentials: true,
-//   origin: function (origin, callback) {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   }
+//   origin:'http://localhost:3000'
 // };
 // app.use(cors(corsOptions)); 
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URL,
+  })
+);
 
 const sessionOptions = {
   secret: "any string",
@@ -65,5 +58,5 @@ ModuleRoutes(app);
 AssignmentRoutes(app);
 UserRoutes(app);
 
-//app.listen(process.env.PORT || 4000);
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
+//app.listen(4000);
