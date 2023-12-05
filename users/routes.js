@@ -22,14 +22,14 @@ function UserRoutes(app) {
   //     res.status(500).json({ error: 'An error occurred while getting account.' });
   //   }
   // };
-  const account = async (req, res) => {
-    const currentUser = req.session["currentUser"];
-    if (!currentUser) {
-      res.sendStatus(403);
-      return;
-    }
-    res.json(currentUser);
-  };
+  // const account = async (req, res) => {
+  //   const currentUser = req.session["currentUser"];
+  //   if (!currentUser) {
+  //     res.sendStatus(403);
+  //     return;
+  //   }
+  //   res.json(currentUser);
+  // };
 
 
   const updateUser = async (req, res) => {
@@ -105,6 +105,15 @@ function UserRoutes(app) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
     }
+  };
+
+  const account = async (req, res) => {
+    const currentUser = req.session["currentUser"];
+    if (!currentUser) {
+      res.sendStatus(403);
+      return;
+    }
+    res.json(currentUser);
   };
 
   const signout = (req, res) => {
